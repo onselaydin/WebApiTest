@@ -1,16 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using WebApiTest.Data;
 
 namespace WebApiTest
@@ -29,8 +23,10 @@ namespace WebApiTest
         {
             //services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddEntityFrameworkNpgsql().AddDbContext<DataContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("PostConn")));
+            services.AddAutoMapper();
             services.AddControllers();
             services.AddCors();
+            services.AddScoped<IAppRepository,AppRepository>(); //olurda bir controller senden bu Interfacei isterse onun karışılığı AppRepositorydir.
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

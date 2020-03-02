@@ -18,8 +18,8 @@ namespace WebApiTest.Models
         public int UserId { get; set; }
 
         //bire çok ilişki yani şehrin fotoğrafları....
-        public List<Photo> Photos { get; set; }
-        public User User { get; set; }
+        public List<Photo> Photos { get; set; } //şehrin fotoları çok tane
+        public User User { get; set; } //şehrin kullanıcı bir tane...
 
     }
 }
