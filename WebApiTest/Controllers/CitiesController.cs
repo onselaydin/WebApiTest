@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using WebApiTest.Data;
 using WebApiTest.Dtos;
+using WebApiTest.Models;
 
 namespace WebApiTest.Controllers
 {
-    [Route("api/[controller]")]
+    [Produces("application/json")]
+    //[Route("api/[controller]")]
+    [Route("api/Cities")]
     [ApiController]
-    public class CitiesController : ControllerBase
+    public class CitiesController : Controller//ControllerBase
     {
         private IAppRepository _appRepository;
         private IMapper _mapper;
@@ -30,6 +29,24 @@ namespace WebApiTest.Controllers
             return Ok(citiesToReturn);
         }
 
+        [HttpPost]
+        [Route("add")]
+        public ActionResult Add([FromBody]City city)
+        {
+            _appRepository.Add(city);
+            _appRepository.SaveAll();
+            return Ok(city);
+        }
+
+        [HttpGet]
+        [Route("detail")]
+        public ActionResult GetCityById(int Id)
+        {
+            var city = _appRepository.GetCityById(Id);
+            var cityToReturn = _mapper.Map<CityForDetailDto>(city);
+            //.Select(x=> new CityForListDto { Description=x.Description,Name=x.Name });
+            return Ok(cityToReturn);
+        }
 
 
     }

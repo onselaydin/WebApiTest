@@ -24,6 +24,9 @@ namespace WebApiTest
             //services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddEntityFrameworkNpgsql().AddDbContext<DataContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("PostConn")));
             services.AddAutoMapper();
+            //services.AddMvc().AddJsonOptions(opt=> {
+            //    opt.SerializerSettings.ReferanceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            //});
             services.AddControllers();
             services.AddCors();
             services.AddScoped<IAppRepository,AppRepository>(); //olurda bir controller senden bu Interfacei isterse onun karışılığı AppRepositorydir.

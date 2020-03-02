@@ -51,14 +51,14 @@ namespace WebApiTest.Data
             return photos;
         }
 
-        public bool SaveAll()
-        {
-            return _context.SaveChanges() > 0;
-        }
+        //public bool SaveAll()
+        //{
+        //    return _context.SaveChanges() > 0;
+        //}
 
         void IAppRepository.SaveAll()
         {
-            throw new NotImplementedException();
+            _context.SaveChanges();
         }
     }
 }
