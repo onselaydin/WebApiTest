@@ -48,6 +48,10 @@ namespace WebApiTest.Controllers
             return Ok(cityToReturn);
         }
 
-
+        public ActionResult GetPhotosByCity(int cityId)
+        {
+            var photos = _appRepository.GetPhotosByCity(cityId);
+            return Ok(photos);
+        }
     }
 }
