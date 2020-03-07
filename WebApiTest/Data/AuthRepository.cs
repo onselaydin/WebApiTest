@@ -16,7 +16,7 @@ namespace WebApiTest.Data
         }
         public  async Task<User> Login(string userName, string password)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == userName);
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == userName);
             if (user == null)
             {
                 return null;
@@ -53,7 +53,7 @@ namespace WebApiTest.Data
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
             return user;
-        }
+        } 
 
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
@@ -67,7 +67,7 @@ namespace WebApiTest.Data
 
         public async Task<bool> UserExists(string userName)
         {
-            if(await _context.Users.AnyAsync(x=>x.Username == userName))
+            if(await _context.Users.AnyAsync(x=>x.UserName == userName))
             {
                 return true;
             }

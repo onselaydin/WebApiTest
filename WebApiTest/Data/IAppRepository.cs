@@ -10,7 +10,7 @@ namespace WebApiTest.Data
     {
         void Add<T>(T entity) where T:class;
         void Delete<T>(T entity) where T : class;
-        void SaveAll();
+        bool SaveAll();
 
         List<City> GetCities();
         List<Photo> GetPhotosByCity(int id);

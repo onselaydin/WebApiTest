@@ -22,14 +22,14 @@ namespace WebApiTest.Controllers
         [HttpGet]
         public async Task<ActionResult> Get()
         {
-            var values = await _context.Values.ToListAsync();
+            var values = await _context.Values.ToListAsync().ConfigureAwait(false);
             return Ok(values);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult> GetValue(int id)
         {
-            var value = await _context.Values.FirstOrDefaultAsync(v => v.Id == id);
+            var value = await _context.Values.FirstOrDefaultAsync(v => v.Id == id).ConfigureAwait(false);
             return Ok(value);
         }
 

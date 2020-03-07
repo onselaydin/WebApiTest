@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using WebApiTest.Data;
+using WebApiTest.Helpers;
 
 namespace WebApiTest
 {
@@ -30,12 +31,12 @@ namespace WebApiTest
             //services.AddMvc().AddJsonOptions(opt=> {
             //    opt.SerializerSettings.ReferanceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             //});
-           
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddControllers();
             services.AddCors();
             services.AddScoped<IAppRepository,AppRepository>(); //olurda bir controller senden bu Interfacei isterse onun karışılığı AppRepositorydir.
-
-            var key = Encoding.ASCII.GetBytes(Configuration.GetSection("Appsetting:Token").Value);
+            services.AddScoped<IAuthRepository, AuthRepository>();
+            var key = Encoding.ASCII.GetBytes(Configuration.GetSection("Appsettings:Token").Value);
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt=> {
                 opt.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
                 {

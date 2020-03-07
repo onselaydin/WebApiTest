@@ -14,7 +14,7 @@ namespace WebApiTest.Models
         public int Id { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
-        public string Username { get; set; }
+        public string UserName { get; set; }
 
         //bire çok ilişki Yani kullanıcının şehirleri
         public List<City> Cities { get; set; }
